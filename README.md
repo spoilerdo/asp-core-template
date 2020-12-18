@@ -1,0 +1,1 @@
+asp-core-template
