@@ -1,0 +1,48 @@
+// Tabs are important and the option is also needed bc of ASP core
+syntax = "proto3";
+option csharp_namespace = "TemplateGRPC";
+
+package Template;
+
+import "google/api/annotations.proto";
+
+service Template_Service {
+	rpc Add (TemplateAddRequest) returns (Template) {
+		option (google.api.http) = {
+			post: "/template",
+			body: "*"
+		};
+	};
+	rpc Get (IdTemplate) returns (Template) {
+		option (google.api.http).get = "/template/{id}";
+	};
+	rpc Update (TemplateUpdateRequest) returns (Template) {
+		option (google.api.http) = {
+			put: "/template",
+			body: "*"
+		};
+	};
+	rpc Delete (IdTemplate) returns (TemplateEmpty) {
+		option (google.api.http).delete = "/template/{id}";
+	};
+}
+
+message IdTemplate {
+	string id = 1;
+}
+
+message TemplateAddRequest {
+	string name = 1;
+}
+
+message TemplateUpdateRequest {
+	string id = 1;
+	string name = 2;
+}
+
+message Template {
+	string id = 1;
+	string name = 2;
+}
+
+message TemplateEmpty {}
