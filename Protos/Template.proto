@@ -7,14 +7,14 @@ package Template;
 import "google/api/annotations.proto";
 
 service Template_Service {
+	rpc Get (IdTemplate) returns (Template) {
+		option (google.api.http).get = "/template/{id}";
+	};
 	rpc Add (TemplateAddRequest) returns (Template) {
 		option (google.api.http) = {
 			post: "/template",
 			body: "*"
 		};
-	};
-	rpc Get (IdTemplate) returns (Template) {
-		option (google.api.http).get = "/template/{id}";
 	};
 	rpc Update (TemplateUpdateRequest) returns (Template) {
 		option (google.api.http) = {

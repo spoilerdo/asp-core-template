@@ -19,7 +19,20 @@ namespace Back_End.Services
             _mapper = mapper;
         }
 
-        public override Task<Template> Add(TemplateAddRequest request, ServerCallContext context)
+        public override async Task<Template> Get(IdTemplate request, ServerCallContext context)
+        {
+            var response = await GetTemplateByIdIfPresent(request.Id);
+            try
+            {
+                return _mapper.Map<TemplateGRPC.Template>(response);
+            }
+            catch (AutoMapperMappingException)
+            {
+                throw new RpcException(new Status(StatusCode.InvalidArgument, "Something went wrong with mapping to GRPC model."));
+            }
+        }
+
+        public override async Task<Template> Add(TemplateAddRequest request, ServerCallContext context)
         {
             // TODO: Validation of the entity (is this required???)
             if (String.IsNullOrWhiteSpace(request.Name))
@@ -29,29 +42,51 @@ namespace Back_End.Services
 
             try
             {
-                TemplateEntity entity = _mapper.Map<TemplateEntity>(request);
+                var entity = _mapper.Map<TemplateEntity>(request);
+                var response = await _repository.Add(entity);
+                return _mapper.Map<TemplateGRPC.Template>(response);
             }
             catch (AutoMapperMappingException)
             {
                 throw new RpcException(new Status(StatusCode.InvalidArgument, "Not all required fields are filled in."));
             }
-
-            return base.Add(request, context);
         }
 
-        public override Task<TemplateEmpty> Delete(IdTemplate request, ServerCallContext context)
+        public override async Task<Template> Update(TemplateUpdateRequest request, ServerCallContext context)
         {
-            return base.Delete(request, context);
+            await GetTemplateByIdIfPresent(request.Id);
+            try
+            {
+                var entity = _mapper.Map<TemplateEntity>(request);
+                var response = await _repository.Update(entity);
+                return _mapper.Map<TemplateGRPC.Template>(response);
+            }
+            catch (AutoMapperMappingException)
+            {
+                throw new RpcException(new Status(StatusCode.InvalidArgument, "Not all required fields are filled in."));
+            }
         }
 
-        public override Task<Template> Get(IdTemplate request, ServerCallContext context)
+        public override async Task<TemplateEmpty> Delete(IdTemplate request, ServerCallContext context)
         {
-            return base.Get(request, context);
+            // check if the template exists first
+            await GetTemplateByIdIfPresent(request.Id);
+            await _repository.Delete(request.Id);
+
+            return new TemplateEmpty { };
         }
 
-        public override Task<Template> Update(TemplateUpdateRequest request, ServerCallContext context)
+        #region private generic methods
+
+        private async Task<TemplateEntity> GetTemplateByIdIfPresent(string id)
         {
-            return base.Update(request, context);
+            var foundTemplate = await _repository.GetTemplateById(id);
+            if (foundTemplate == null)
+                throw new RpcException(new Status(StatusCode.NotFound, "Template not found"));
+
+            return foundTemplate;
         }
+
+        #endregion
     }
 }

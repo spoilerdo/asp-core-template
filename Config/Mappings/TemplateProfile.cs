@@ -10,6 +10,9 @@ namespace Back_End.Config.Mappings
         {
             CreateMap<Template, TemplateEntity>();
             CreateMap<TemplateEntity, Template>();
+
+            CreateMap<TemplateUpdateRequest, TemplateEntity>();
+            CreateMap<TemplateEntity, TemplateUpdateRequest>();
         }
     }
 }
