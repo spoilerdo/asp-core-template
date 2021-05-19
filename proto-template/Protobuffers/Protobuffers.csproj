@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Google.Api.Gax.Grpc"/>
+    <PackageReference Include="Grpc.AspNetCore"/>
+    <PackageReference Include="Grpc.Tools"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Protobuf Include="Protos\*.proto" GrpcServices="Both"/>
+  </ItemGroup>
+</Project>

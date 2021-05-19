@@ -1,0 +1,34 @@
+// Tabs are important and the option is also needed bc of ASP core
+syntax = "proto3";
+
+package template;
+
+// import "google/protobuf/annotations.proto";
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "Template_Service.Proto";
+
+service ITemplateService {
+	rpc Get (IdTemplate) returns (Template);
+	rpc Add (TemplateAddRequest) returns (Template);
+	rpc Update (TemplateUpdateRequest) returns (Template);
+	rpc Delete (IdTemplate) returns (google.protobuf.Empty);
+}
+
+message IdTemplate {
+	string id = 1;
+}
+
+message TemplateAddRequest {
+	string name = 1;
+}
+
+message TemplateUpdateRequest {
+	string id = 1;
+	string name = 2;
+}
+
+message Template {
+	string id = 1;
+	string name = 2;
+}

@@ -1,1 +1,1 @@
-asp-core-template
+proto-template
