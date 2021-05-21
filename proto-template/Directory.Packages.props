@@ -14,10 +14,11 @@
         <PackageVersion Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.0"/>
         <PackageVersion Include="Microsoft.Extensions.Configuration" Version="5.0.0"/>
         <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1"/>
-        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="*"/>
-        <PackageVersion Include="Microsoft.EntityFrameworkCore.Proxies" Version="*"/>
-        <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="*"/>
-        <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="*"/>
-        <PackageVersion Include="MongoDB.Bson" Version="*"/>
+        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="5.0.0"/>
+        <PackageVersion Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.6"/>
+        <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="5.0.6"/>
+        <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.6"/>
+        <PackageVersion Include="MongoDB.Bson" Version="2.12.3"/>
+        <PackageVersion Include="MongoDB.Driver" Version="2.12.3"/>
     </ItemGroup>
 </Project>

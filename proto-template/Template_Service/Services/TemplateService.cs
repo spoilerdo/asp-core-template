@@ -2,12 +2,14 @@ using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using Grpc.Core;
+using Template_Service.Proto;
 using Template_Service.Persistence.Entities;
 using Template_Service.Persistence.Repositories;
+using Google.Protobuf.WellKnownTypes;
 
 namespace Template_Service.Services
 {
-    public class TemplateService : Template_Service.
+    public class TemplateService : ITemplateService.ITemplateServiceBase
     {
         private readonly IMongoTemplateRepository _repository;
         private readonly IMapper _mapper;
@@ -23,7 +25,7 @@ namespace Template_Service.Services
             var response = await GetTemplateByIdIfPresent(request.Id);
             try
             {
-                return _mapper.Map<TemplateGRPC.Template>(response);
+                return _mapper.Map<Template>(response);
             }
             catch (AutoMapperMappingException)
             {
@@ -41,9 +43,9 @@ namespace Template_Service.Services
 
             try
             {
-                var entity = _mapper.Map<TemplateEntity>(request);
+                var entity = _mapper.Map<MongoTemplateEntity>(request);
                 var response = await _repository.Add(entity);
-                return _mapper.Map<TemplateGRPC.Template>(response);
+                return _mapper.Map<Template>(response);
             }
             catch (AutoMapperMappingException)
             {
@@ -56,9 +58,9 @@ namespace Template_Service.Services
             await GetTemplateByIdIfPresent(request.Id);
             try
             {
-                var entity = _mapper.Map<TemplateEntity>(request);
+                var entity = _mapper.Map<MongoTemplateEntity>(request);
                 var response = await _repository.Update(entity);
-                return _mapper.Map<TemplateGRPC.Template>(response);
+                return _mapper.Map<Template>(response);
             }
             catch (AutoMapperMappingException)
             {
@@ -66,18 +68,18 @@ namespace Template_Service.Services
             }
         }
 
-        public override async Task<TemplateEmpty> Delete(IdTemplate request, ServerCallContext context)
+        public override async Task<Empty> Delete(IdTemplate request, ServerCallContext context)
         {
             // check if the template exists first
             await GetTemplateByIdIfPresent(request.Id);
             await _repository.Delete(request.Id);
 
-            return new TemplateEmpty { };
+            return new Empty { };
         }
 
         #region private generic methods
 
-        private async Task<TemplateEntity> GetTemplateByIdIfPresent(string id)
+        private async Task<MongoTemplateEntity> GetTemplateByIdIfPresent(string id)
         {
             var foundTemplate = await _repository.GetTemplateById(id);
             if (foundTemplate == null)

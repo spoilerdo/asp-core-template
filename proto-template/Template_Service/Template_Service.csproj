@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <ManagePackageVersionCentrally>true</ManagePackageVersionCentrally>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore"/>
@@ -18,6 +18,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore"/>
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory"/>
     <PackageReference Include="MongoDB.Bson"/>
+    <PackageReference Include="MongoDB.Driver"/>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../Protobuffers/Protobuffers.csproj"/>

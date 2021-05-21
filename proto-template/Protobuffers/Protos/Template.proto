@@ -3,7 +3,6 @@ syntax = "proto3";
 
 package template;
 
-// import "google/protobuf/annotations.proto";
 import "google/protobuf/empty.proto";
 
 option csharp_namespace = "Template_Service.Proto";

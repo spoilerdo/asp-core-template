@@ -1,18 +1,18 @@
 using AutoMapper;
-using Back_End.Persistence.Entities;
-using TemplateGRPC;
+using Template_Service.Persistence.Entities;
+using Template_Service.Proto;
 
-namespace Back_End.Config.Mappings
+namespace Template_Service.Config.Mappings
 {
     public class TemplateProfile : Profile
     {
         public TemplateProfile()
         {
-            CreateMap<Template, TemplateEntity>();
-            CreateMap<TemplateEntity, Template>();
+            CreateMap<Template, MongoTemplateEntity>();
+            CreateMap<MongoTemplateEntity, Template>();
 
-            CreateMap<TemplateUpdateRequest, TemplateEntity>();
-            CreateMap<TemplateEntity, TemplateUpdateRequest>();
+            CreateMap<TemplateUpdateRequest, MongoTemplateEntity>();
+            CreateMap<MongoTemplateEntity, TemplateUpdateRequest>();
         }
     }
 }
