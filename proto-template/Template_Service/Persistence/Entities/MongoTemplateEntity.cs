@@ -1,10 +1,8 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Template_Service.Persistence.Entities
-{
-    public class MongoTemplateEntity
-    {
+namespace Template_Service.Persistence.Entities {
+    public class MongoTemplateEntity {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonIgnoreIfDefault]
@@ -13,8 +11,7 @@ namespace Template_Service.Persistence.Entities
 
         public MongoTemplateEntity() { }
 
-        public MongoTemplateEntity(string name)
-        {
+        public MongoTemplateEntity(string name) {
             this.Name = name;
         }
     }
