@@ -1,4 +1,4 @@
-namespace Back_End {
+namespace Template_Service {
     public class Settings {
         public DatabaseSettings Database { get; set; } = new DatabaseSettings();
 
