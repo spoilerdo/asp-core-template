@@ -7,9 +7,11 @@
         <PackageVersion Include="Google.Api.Gax.Grpc" Version="3.3.0"/>
         <PackageVersion Include="Grpc.Tools" Version="2.37.0"/>
         <PackageVersion Include="Grpc.AspNetCore.Web" Version="2.37.0"/>
+        <PackageVersion Include="Calzolari.Grpc.AspNetCore.Validation" Version="5.2.0"/>
 
         <PackageVersion Include="AutoMapper" Version="10.1.1"/>
         <PackageVersion Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1"/>
+        <PackageVersion Include="FluentValidation.AspNetCore" Version="10.2.2"/>
         <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.6"/>
         <PackageVersion Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.0"/>
         <PackageVersion Include="Microsoft.Extensions.Configuration" Version="5.0.0"/>

@@ -1,4 +1,5 @@
 ﻿using System;
+using Calzolari.Grpc.AspNetCore.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Template_Service.Config.Contexts;
+using Template_Service.Config.Mappings.Validators;
 using Template_Service.Config.Models;
 using Template_Service.Persistence.Repositories;
 using Template_Service.Services;
@@ -26,7 +28,10 @@ namespace Template_Service {
             var settings = new Settings();
             Configuration.Bind(nameof(Settings), settings);
 
-            services.AddGrpc();
+            ConfigureSql(services, settings);
+            ConfigureCors(services);
+            ConfigureGrpc(services);
+
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IMongoTemplateRepository, MongoTemplateRepository>();
         }
@@ -57,6 +62,14 @@ namespace Template_Service {
                         .AllowAnyHeader();
                 });
             });
+        }
+
+        protected virtual void ConfigureGrpc(IServiceCollection services) {
+            services.AddGrpc(options => {
+                options.EnableMessageValidation();
+            });
+            services.AddGrpcValidation();
+            services.AddValidator<TemplateAddValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

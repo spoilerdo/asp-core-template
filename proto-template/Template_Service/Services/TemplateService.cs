@@ -27,11 +27,6 @@ namespace Template_Service.Services {
         }
 
         public override async Task<Template> Add(TemplateAddRequest request, ServerCallContext context) {
-            // TODO: Validation of the entity (is this required???)
-            if (String.IsNullOrWhiteSpace(request.Name)) {
-                throw new RpcException(new Status(StatusCode.InvalidArgument, "Name is required"));
-            }
-
             try {
                 var entity = _mapper.Map<MongoTemplateEntity>(request);
                 var response = await _repository.Add(entity);

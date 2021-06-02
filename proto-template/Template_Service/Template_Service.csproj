@@ -19,6 +19,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory"/>
     <PackageReference Include="MongoDB.Bson"/>
     <PackageReference Include="MongoDB.Driver"/>
+    <PackageReference Include="FluentValidation.AspNetCore"/>
+    <PackageReference Include="Calzolari.Grpc.AspNetCore.Validation"/>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../Protobuffers/Protobuffers.csproj"/>
