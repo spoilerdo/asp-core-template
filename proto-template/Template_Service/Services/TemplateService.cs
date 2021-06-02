@@ -1,10 +1,9 @@
-using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using Grpc.Core;
 using Template_Service.Proto;
 using Template_Service.Persistence.Entities;
-using Template_Service.Persistence.Repositories;
+using Template_Service.Persistence.Repositories.Mongo;
 using Google.Protobuf.WellKnownTypes;
 
 namespace Template_Service.Services {

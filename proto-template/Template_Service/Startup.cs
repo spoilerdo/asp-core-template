@@ -10,7 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Template_Service.Config.Contexts;
 using Template_Service.Config.Mappings.Validators;
 using Template_Service.Config.Models;
-using Template_Service.Persistence.Repositories;
+using Template_Service.Persistence.Repositories.Mongo;
 using Template_Service.Services;
 
 namespace Template_Service {
@@ -28,7 +28,7 @@ namespace Template_Service {
             var settings = new Settings();
             Configuration.Bind(nameof(Settings), settings);
 
-            ConfigureSql(services, settings);
+            ConfigureMongo(services, settings);
             ConfigureCors(services);
             ConfigureGrpc(services);
 
@@ -36,7 +36,6 @@ namespace Template_Service {
             services.AddScoped<IMongoTemplateRepository, MongoTemplateRepository>();
         }
 
-        //Can be overridden in a derived class and also only be called from within this class or any derived classess
         protected virtual void ConfigureMongo(IServiceCollection services, Settings settings) {
             services.Configure<MongoSettings>(options => {
                 options.ConnectionString = settings.Database.ConnectionString;
@@ -44,6 +43,7 @@ namespace Template_Service {
             });
         }
 
+        //NOTE: Can be overridden in a derived class and also only be called from within this class or any derived classess
         protected virtual void ConfigureSql(IServiceCollection services, Settings settings) {
             services.AddDbContext<MySqlDbContext>(options => {
                 var connectionString = Configuration.GetConnectionString("AnomalyDbConnection");

@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Template_Service.Persistence.Entities;
 
-namespace Template_Service.Persistence.Repositories {
+namespace Template_Service.Persistence.Repositories.Mongo {
     public interface IMongoTemplateRepository {
         Task<MongoTemplateEntity> GetTemplateById(string id);
         Task<MongoTemplateEntity> Add(MongoTemplateEntity template);

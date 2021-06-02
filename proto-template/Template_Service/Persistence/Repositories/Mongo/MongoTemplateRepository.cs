@@ -6,7 +6,7 @@ using Template_Service.Config.Contexts;
 using Template_Service.Config.Models;
 using Template_Service.Persistence.Entities;
 
-namespace Template_Service.Persistence.Repositories {
+namespace Template_Service.Persistence.Repositories.Mongo {
     public class MongoTemplateRepository : IMongoTemplateRepository {
         private readonly MongoDbContext _context;
 
